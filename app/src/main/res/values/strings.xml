@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ImFitPlus</string>
+    <string-array name="level_activity">
+        <item>sedentário</item>
+        <item>leve</item>
+        <item>moderado</item>
+        <item>intenso</item>
+    </string-array>
 </resources>
