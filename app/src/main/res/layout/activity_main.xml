@@ -8,12 +8,31 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/boas_vindas_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Descubra seu perfil de saúde e receba recomendações personalizadas!"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:layout_marginTop="150dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/boas_vindas_tv"
+        android:text="Comece Aqui"
+        app:layout_constraintStart_toStartOf="parent"
+        android:width="200dp"
+        android:height="80dp"
+        android:textSize="20sp"
+        android:backgroundTint="@color/orange"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
