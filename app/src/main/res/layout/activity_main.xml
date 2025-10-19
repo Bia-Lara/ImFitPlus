@@ -7,6 +7,19 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+    <ImageView
+        android:id="@+id/image_logo"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:src="@drawable/logo_im_fit_plus"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
     <TextView
         android:id="@+id/boas_vindas_tv"
         android:layout_width="wrap_content"
@@ -17,11 +30,12 @@
         android:layout_marginTop="150dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_logo"
         />
 
     <Button
-        android:layout_width="wrap_content"
+        android:id="@+id/comecar_bt"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/boas_vindas_tv"
         android:text="Comece Aqui"
@@ -33,6 +47,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
 
+        />
+
+
+    <CheckBox
+        android:id="@+id/checkbox_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Eu aceito os termos de uso"
+        app:layout_constraintTop_toBottomOf="@+id/comecar_bt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
