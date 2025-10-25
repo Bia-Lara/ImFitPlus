@@ -49,16 +49,4 @@
 
         />
 
-
-    <CheckBox
-        android:id="@+id/checkbox_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Eu aceito os termos de uso"
-        app:layout_constraintTop_toBottomOf="@+id/comecar_bt"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

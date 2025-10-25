@@ -17,18 +17,14 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    private lateinit var narl: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        narl= registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()){}
-
         binding.comecarBt.setOnClickListener {
             val intent = Intent(this@MainActivity, PersonalData::class.java)
-            narl.launch(intent)
+            startActivity(intent)
         }
 
     }
