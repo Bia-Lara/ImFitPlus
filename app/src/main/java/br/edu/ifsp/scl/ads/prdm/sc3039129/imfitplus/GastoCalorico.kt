@@ -53,7 +53,9 @@ class GastoCalorico : AppCompatActivity() {
         binding.voltarBt.setOnClickListener { finish() }
 
         binding.calcularPesoIdealBt.setOnClickListener {
-            var intent = Intent(this@GastoCalorico, PesoIdeal::class.java)
+            var intent = Intent(this@GastoCalorico, PesoIdeal::class.java).apply{
+                putExtra(EXTRA_DATA_PERSON, dados)
+            }
             startActivity(intent)
         }
     }
