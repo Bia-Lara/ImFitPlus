@@ -23,9 +23,6 @@ class PersonalData : AppCompatActivity() {
         ActivityPersonalDataBinding.inflate(layoutInflater)
     }
 
-    private lateinit var narl: ActivityResultLauncher<Intent>
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -92,9 +89,7 @@ class PersonalData : AppCompatActivity() {
                         putExtra(EXTRA_DATA_PERSON, dadosPessoa)
                     }
                     startActivity(intent)
-            }
-
-
+                }
             }
         }
     }
