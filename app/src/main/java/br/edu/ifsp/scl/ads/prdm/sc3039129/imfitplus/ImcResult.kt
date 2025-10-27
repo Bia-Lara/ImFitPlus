@@ -18,14 +18,10 @@ class ImcResult : AppCompatActivity() {
         ActivityImcResultBinding.inflate(layoutInflater)
     }
 
-    private lateinit var narl: ActivityResultLauncher<Intent>
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(binding.root)
-
-        narl = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){}
 
         val dadosPessoa = intent.getParcelableExtra<DataPerson>(EXTRA_DATA_PERSON)
 
@@ -55,8 +51,10 @@ class ImcResult : AppCompatActivity() {
         binding.voltarBt.setOnClickListener { finish() }
 
         binding.calcularGastoCaloricoBt.setOnClickListener {
-            var intent = Intent(this@ImcResult, GastoCalorico::class.java)
-            narl.launch(intent)
+            var intent = Intent(this@ImcResult, GastoCalorico::class.java).apply {
+                putExtra(EXTRA_DATA_PERSON, dadosPessoa)
+            }
+            startActivity(intent)
         }
     }
 }
