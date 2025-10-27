@@ -32,8 +32,8 @@ class ImcResult : AppCompatActivity() {
         fun calculateCategory(imc:Double):String{
             return when {
                 imc < 18.5 -> "Abaixo do Peso"
-                imc in 18.5..24.9 -> "Peso Normal"
-                imc in 25.0..29.9 -> "Sobrepeso"
+                imc >= 18.5 && imc < 25.0 -> "Peso Normal"
+                imc >= 25.0 && imc < 30.0 -> "Sobrepeso"
                 imc >= 30.0 -> "Obesidade"
                 else -> "Indefinido"
             }
