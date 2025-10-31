@@ -12,6 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ImFitPlus">
         <activity
+            android:name=".ResumoSaude"
+            android:exported="false" />
+        <activity
+            android:name=".teste"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".PesoIdeal"
             android:exported="false" />
         <activity

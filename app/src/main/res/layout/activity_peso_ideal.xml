@@ -61,4 +61,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />
+
+    <Button
+        android:id="@+id/resumo_bt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Resumo da Saúde"
+        android:textSize="20sp"
+        android:padding="15dp"
+        android:backgroundTint="@color/orange"
+        app:layout_constraintTop_toBottomOf="@+id/voltar_bt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

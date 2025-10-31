@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.databinding.ActivityImcResultBinding
+import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.Constants.EXTRA_CATEGORIA
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.Constants.EXTRA_DATA_PERSON
+import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.Constants.EXTRA_IMC
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.DataPerson
 
 class ImcResult : AppCompatActivity() {
@@ -39,20 +41,26 @@ class ImcResult : AppCompatActivity() {
             }
         }
 
+        var imc=0.0
+        var categoria=""
         dadosPessoa.let{
             with(binding){
                 nomeTv.setText(it?.nome)
-                val imc= calculateImc(it?.peso!!, it?.altura!!)
+                imc= calculateImc(it?.peso!!, it?.altura!!)
                 imcTv.setText(String.format("%.2f", imc))
-                categoriaTv.setText(calculateCategory(imc))
+                categoria= calculateCategory(imc)
+                categoriaTv.setText(categoria)
             }
         }
 
         binding.voltarBt.setOnClickListener { finish() }
 
         binding.calcularGastoCaloricoBt.setOnClickListener {
+
             var intent = Intent(this@ImcResult, GastoCalorico::class.java).apply {
                 putExtra(EXTRA_DATA_PERSON, dadosPessoa)
+                putExtra(EXTRA_IMC, imc)
+                putExtra(EXTRA_CATEGORIA, categoria)
             }
             startActivity(intent)
         }
