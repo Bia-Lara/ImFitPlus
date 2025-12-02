@@ -18,6 +18,9 @@ interface CalculoDao {
     @Query("SELECT * FROM Calculo WHERE id=:id")
     fun getCalculoById(id: Int): Calculo
 
+    @Query("SELECT * FROM Calculo WHERE idUsuario = :usuarioId ORDER BY dataHora DESC")
+    suspend fun getHistoricoUsuario(usuarioId: Int): MutableList<Calculo>
+
     @Delete
     fun delete(calculo: Calculo): Int
 
