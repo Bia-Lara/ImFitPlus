@@ -7,13 +7,12 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @Entity
-data class DataPerson(
+data class Calculo(
     @PrimaryKey(autoGenerate = true) var id: Int? = -1,
-    var nome: String = "",
-    var idade: Int = 1,
-    var sexo: String = "",
-    var altura: Double = 0.0,
-    var peso: Double = 0.0,
-    var nivel_atividade: String=""
-
-): Parcelable
+    val idUsuario: Int,
+    val imc: Double?,
+    val categoriaImc: String?,
+    val tmb: Double?,
+    val pesoIdeal: Double?,
+    val dataHora: Long
+) : Parcelable
