@@ -1,4 +1,4 @@
-package br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus
+package br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,19 +7,12 @@ import android.widget.AdapterView
 import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.result.registerForActivityResult
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.databinding.ActivityPersonalDataBinding
-import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.Constants.EXTRA_DATA_PERSON
+import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.Constants
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.DataPerson
 
-class PersonalData : AppCompatActivity() {
+class PersonalData : BaseActivity() {
     private val binding: ActivityPersonalDataBinding by lazy {
         ActivityPersonalDataBinding.inflate(layoutInflater)
     }
@@ -27,6 +20,8 @@ class PersonalData : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        setSupportActionBar(binding.toolbarIn.toolbar)
 
         fun validateData(nome:String, idade:Int, altura:Double, peso:Double, sexo:Int): Boolean{
             if (nome.isEmpty()) { return false }
@@ -87,7 +82,7 @@ class PersonalData : AppCompatActivity() {
                     )
 
                     val intent = Intent(this@PersonalData, ImcResult::class.java).apply {
-                        putExtra(EXTRA_DATA_PERSON, dadosPessoa)
+                        putExtra(Constants.EXTRA_DATA_PERSON, dadosPessoa)
                     }
                     startActivity(intent)
                 }

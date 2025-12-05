@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ImFitPlus">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,23 +21,23 @@
         </activity>
 
         <activity
-            android:name=".HistoricoActivity"
+            android:name=".ui.HistoricoActivity"
             android:exported="false" />
 
         <activity
-            android:name=".ResumoSaude"
+            android:name=".ui.ResumoSaude"
             android:exported="false" />
         <activity
-            android:name=".PesoIdeal"
+            android:name=".ui.PesoIdeal"
             android:exported="false" />
         <activity
-            android:name=".GastoCalorico"
+            android:name=".ui.GastoCalorico"
             android:exported="false" />
         <activity
-            android:name=".ImcResult"
+            android:name=".ui.ImcResult"
             android:exported="false" />
         <activity
-            android:name=".PersonalData"
+            android:name=".ui.PersonalData"
             android:exported="false" />
 
     </application>

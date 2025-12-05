@@ -1,21 +1,13 @@
-package br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus
+package br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.ui
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.result.registerForActivityResult
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.databinding.ActivityImcResultBinding
-import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.Constants.EXTRA_CATEGORIA
-import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.Constants.EXTRA_DATA_PERSON
-import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.Constants.EXTRA_IMC
+import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.Constants
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.DataPerson
 
-class ImcResult : AppCompatActivity() {
+class ImcResult : BaseActivity() {
     private val binding: ActivityImcResultBinding by lazy{
         ActivityImcResultBinding.inflate(layoutInflater)
     }
@@ -23,9 +15,11 @@ class ImcResult : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setSupportActionBar(binding.toolbarIn.toolbar)
+
         setContentView(binding.root)
 
-        val dadosPessoa = intent.getParcelableExtra<DataPerson>(EXTRA_DATA_PERSON)
+        val dadosPessoa = intent.getParcelableExtra<DataPerson>(Constants.EXTRA_DATA_PERSON)
 
         fun calculateImc(peso:Double, altura:Double):Double{
             return peso / (altura * altura)
@@ -58,9 +52,9 @@ class ImcResult : AppCompatActivity() {
         binding.calcularGastoCaloricoBt.setOnClickListener {
 
             var intent = Intent(this@ImcResult, GastoCalorico::class.java).apply {
-                putExtra(EXTRA_DATA_PERSON, dadosPessoa)
-                putExtra(EXTRA_IMC, imc)
-                putExtra(EXTRA_CATEGORIA, categoria)
+                putExtra(Constants.EXTRA_DATA_PERSON, dadosPessoa)
+                putExtra(Constants.EXTRA_IMC, imc)
+                putExtra(Constants.EXTRA_CATEGORIA, categoria)
             }
             startActivity(intent)
         }
