@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Nome"
-        android:textColor="#000000"
         android:textStyle="bold"
         android:textSize="20sp" />
 
@@ -25,7 +24,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="IMC: 00.0"
-        android:textColor="#333333"
         android:textSize="16sp" />
 
 
@@ -34,7 +32,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Categoria: Normal"
-        android:textColor="#555555"
         android:textSize="15sp" />
 
     <TextView
@@ -42,7 +39,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TMB: 1800 kcal"
-        android:textColor="#333333"
         android:textSize="16sp"
         android:layout_marginTop="4dp" />
 
@@ -51,7 +47,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Peso ideal: 70 kg"
-        android:textColor="#333333"
         android:textSize="16sp" />
 
     <TextView
@@ -59,7 +54,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Data: 01/12/2025"
-        android:textColor="#777777"
         android:textSize="14sp"
         android:layout_marginTop="6dp" />
 

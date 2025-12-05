@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 
+@androidx.room.Dao
 interface DataPersonDao {
     @Insert
     fun insert(dataPerson: DataPerson): Long

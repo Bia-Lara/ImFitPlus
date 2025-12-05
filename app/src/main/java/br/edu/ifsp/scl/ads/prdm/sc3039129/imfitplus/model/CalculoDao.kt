@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 
+@androidx.room.Dao
 interface CalculoDao {
     @Insert
     fun insert(calculo: Calculo): Long

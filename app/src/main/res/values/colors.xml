@@ -3,5 +3,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="orange">#F4A018</color>
-
+    <color name="backgound_image">#18262F</color>
 </resources>

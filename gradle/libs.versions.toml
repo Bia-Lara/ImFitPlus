@@ -27,8 +27,8 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 androidx-room-runtime = {group = "androidx.room", name="room-runtime", version.ref="roomVersion"}
 androidx-room-compiler = {group="androidx.room", name="room-compiler", version.ref="roomVersion"}
 androidx-room-ktx= {group="androidx.room", name="room-ktx", version.ref="roomVersion"}
-org-jetbrains-kotlinx-coroutines-android= {group="org.jetbrains.kotlinx", name="kotlin-coroutines", version.ref="coroutinesVersion"}
-
+org-jetbrains-kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutinesVersion" }
+org-jetbrains-kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutinesVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
