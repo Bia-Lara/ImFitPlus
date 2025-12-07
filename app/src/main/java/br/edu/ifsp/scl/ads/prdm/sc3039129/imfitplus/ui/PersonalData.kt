@@ -93,7 +93,7 @@ class PersonalData : BaseActivity() {
                         userId ->
                         val intent = Intent(this@PersonalData, ImcResult::class.java).apply {
                             putExtra(Constants.EXTRA_DATA_PERSON, dadosPessoa)
-                            putExtra(Constants.EXTRA_USER_ID, userId.toInt())
+                            putExtra(Constants.EXTRA_USER_ID, userId)
                         }
                         startActivity(intent)
                     }

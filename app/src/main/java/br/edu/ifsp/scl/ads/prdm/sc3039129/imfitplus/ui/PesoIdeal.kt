@@ -3,6 +3,7 @@ package br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.ui
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.controller.MainController
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.ui.ResumoSaude
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.databinding.ActivityPesoIdealBinding
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.Constants
@@ -13,7 +14,6 @@ class PesoIdeal : BaseActivity() {
         ActivityPesoIdealBinding.inflate(layoutInflater)
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -21,6 +21,7 @@ class PesoIdeal : BaseActivity() {
         setSupportActionBar(binding.toolbarIn.toolbar)
 
         val dados= intent.getParcelableExtra<DataPerson>(Constants.EXTRA_DATA_PERSON)
+
 
         fun calculatePesoIdeal(altura:Double):Double{
             return 22 * (altura*altura)

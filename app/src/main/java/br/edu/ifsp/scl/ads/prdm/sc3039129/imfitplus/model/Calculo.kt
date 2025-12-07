@@ -14,7 +14,7 @@ data class Calculo(
     val nome: String?,
     val imc: Double?,
     val categoriaImc: String?,
-    val tmb: Double?,
-    val pesoIdeal: Double?,
-    val dataHora: LocalDate
+    val tmb: Double? = 0.0,
+    val pesoIdeal: Double? = 0.0,
+    val dataHora: LocalDate = LocalDate.now()
 ) : Parcelable

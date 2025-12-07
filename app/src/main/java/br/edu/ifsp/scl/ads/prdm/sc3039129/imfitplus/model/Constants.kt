@@ -10,5 +10,7 @@ object Constants {
     const val EXTRA_PESO= "EXTRA_PESO"
 
     const val EXTRA_USER_ID= "EXTRA_USER_ID"
+
+    const val EXTRA_CALCULO_ID = "EXTRA_CALCULO_ID"
 }
 

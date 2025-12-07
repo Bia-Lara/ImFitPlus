@@ -35,9 +35,10 @@ class MainController(private val activity: AppCompatActivity) {
         }
     }
 
-    fun inserirCalculo(calculo: Calculo) {
+    fun inserirCalculo(calculo: Calculo, onResult: (Long) -> Unit) {
         databaseScope.launch {
-            calculoDao.insert(calculo)
+            val id = calculoDao.insert(calculo)
+            activity.runOnUiThread { onResult(id) }
         }
     }
 
