@@ -13,6 +13,7 @@ class PesoIdeal : BaseActivity() {
         ActivityPesoIdealBinding.inflate(layoutInflater)
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)

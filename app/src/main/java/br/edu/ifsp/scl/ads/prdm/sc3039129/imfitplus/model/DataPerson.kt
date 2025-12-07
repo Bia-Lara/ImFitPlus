@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @Entity
 data class DataPerson(
-    @PrimaryKey(autoGenerate = true) var id: Int? = -1,
+    @PrimaryKey(autoGenerate = true) var id: Int = 0,
     var nome: String = "",
     var idade: Int = 1,
     var sexo: String = "",

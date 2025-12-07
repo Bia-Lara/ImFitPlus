@@ -8,14 +8,22 @@ import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.controller.MainController
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.databinding.ActivityPersonalDataBinding
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.Constants
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.DataPerson
+import kotlinx.coroutines.launch
 
 class PersonalData : BaseActivity() {
     private val binding: ActivityPersonalDataBinding by lazy {
         ActivityPersonalDataBinding.inflate(layoutInflater)
     }
+
+    private val mainController: MainController by lazy {
+        MainController(this)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,10 +89,16 @@ class PersonalData : BaseActivity() {
                         nivel_atividade = nivelAtividadeFisica
                     )
 
-                    val intent = Intent(this@PersonalData, ImcResult::class.java).apply {
-                        putExtra(Constants.EXTRA_DATA_PERSON, dadosPessoa)
+                    mainController.inserirUsuario(dadosPessoa){
+                        userId ->
+                        val intent = Intent(this@PersonalData, ImcResult::class.java).apply {
+                            putExtra(Constants.EXTRA_DATA_PERSON, dadosPessoa)
+                            putExtra(Constants.EXTRA_USER_ID, userId.toInt())
+                        }
+                        startActivity(intent)
                     }
-                    startActivity(intent)
+
+
                 }
             }
         }

@@ -1,6 +1,8 @@
 package br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.controller
 
 
+import android.content.Context
+import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.ui.MainActivity
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.CalculoDao
@@ -12,10 +14,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainController(val mainActivity: MainActivity) {
+class MainController(private val activity: AppCompatActivity) {
 
     private val db: AppRoom = Room.databaseBuilder(
-        mainActivity,
+        activity.applicationContext,
         AppRoom::class.java,
         "imfitplus-db"
     ).build()
@@ -24,10 +26,10 @@ class MainController(val mainActivity: MainActivity) {
     val personDao: DataPersonDao = db.PersonDao()
     private val databaseScope = CoroutineScope(Dispatchers.IO)
 
-    fun inserirOuAtualizarUsuario(usuario: DataPerson, onResult: (Long) -> Unit) {
+    fun inserirUsuario(usuario: DataPerson, onResult: (Long) -> Unit) {
         databaseScope.launch {
             val id = personDao.insert(usuario)
-            mainActivity.runOnUiThread {
+            activity.runOnUiThread {
                 onResult(id)
             }
         }

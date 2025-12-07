@@ -9,7 +9,7 @@ import java.time.LocalDate
 @Parcelize
 @Entity
 data class Calculo(
-    @PrimaryKey(autoGenerate = true) var id: Int? = -1,
+    @PrimaryKey(autoGenerate = true) var id: Int = 0,
     val idUsuario: Int,
     val nome: String?,
     val imc: Double?,

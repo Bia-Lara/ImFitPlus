@@ -8,4 +8,7 @@ object Constants {
     const val EXTRA_CATEGORIA= "EXTRA_CATEGORIA"
     const val EXTRA_NOME= "EXTRA_NOME"
     const val EXTRA_PESO= "EXTRA_PESO"
+
+    const val EXTRA_USER_ID= "EXTRA_USER_ID"
 }
+
