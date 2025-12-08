@@ -19,6 +19,8 @@ interface DataPersonDao {
     @Query("SELECT * FROM DataPerson WHERE id=:id")
     fun getDataPersonById(id: Int): DataPerson
 
+    @Query("SELECT * FROM DataPerson ORDER BY id DESC LIMIT 1")
+    fun getUltimoUsuario(): DataPerson?
     @Delete
     fun delete(dataPerson: DataPerson): Int
 }

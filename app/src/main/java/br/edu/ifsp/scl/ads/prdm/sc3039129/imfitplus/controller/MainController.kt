@@ -10,6 +10,7 @@ import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.DataPerson
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.DataPersonDao
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.ui.ImcResult
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.ui.GastoCalorico
+import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.ui.PersonalData
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.ui.PesoIdeal
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -44,48 +45,72 @@ class MainController(private val activity: AppCompatActivity) {
         }
     }
 
-        fun getCalculo(id: Int) {
-            databaseScope.launch {
-                val calculoEncontrado = calculoDao.getCalculoById(id)
+    fun getCalculo(id: Int) {
+        databaseScope.launch {
+            val calculoEncontrado = calculoDao.getCalculoById(id)
 
-                val handler = when (activity) {
-                    is ImcResult -> activity.uiHandler
-                    is GastoCalorico -> activity.uiHandler
-                    is PesoIdeal -> activity.uiHandler
-                    else -> null
-                }
-
-                handler?.apply {
-                    sendMessage(obtainMessage().apply {
-                        what = 1
-                        data = Bundle().apply {
-                            putParcelable("calculo", calculoEncontrado)
-                        }
-                    })
-                }
+            val handler = when (activity) {
+                is ImcResult -> activity.uiHandler
+                is GastoCalorico -> activity.uiHandler
+                is PesoIdeal -> activity.uiHandler
+                else -> null
             }
-        }
 
-        fun getAllCalculos(): MutableList<Calculo> {
-            return calculoDao.getAllCalculos()
-        }
-
-        fun updateCalculo(calculo: Calculo) {
-            databaseScope.launch {
-                calculoDao.update(calculo)
+            handler?.apply {
+                sendMessage(obtainMessage().apply {
+                    what = 1
+                    data = Bundle().apply {
+                        putParcelable("calculo", calculoEncontrado)
+                    }
+                })
             }
-        }
-
-        fun inserirUsuario(usuario: DataPerson, onResult: (Long) -> Unit) {
-            databaseScope.launch {
-                val id = personDao.insert(usuario)
-                activity.runOnUiThread {
-                    onResult(id)
-                }
-            }
-        }
-
-        fun buscarHistorico() {
-            // TODO
         }
     }
+
+    fun getAllCalculos(): MutableList<Calculo> {
+        return calculoDao.getAllCalculos()
+    }
+
+    fun updateCalculo(calculo: Calculo) {
+        databaseScope.launch {
+            calculoDao.update(calculo)
+        }
+    }
+
+    fun inserirUsuario(usuario: DataPerson, onResult: (Long) -> Unit) {
+        databaseScope.launch {
+            val id = personDao.insert(usuario)
+            activity.runOnUiThread {
+                onResult(id)
+            }
+        }
+    }
+
+
+    fun getUltimoUsuario() {
+        databaseScope.launch {
+            val ultimoUsuario = personDao.getUltimoUsuario()
+
+            val handler = when (activity) {
+                is PersonalData -> activity.uiHandler
+                else -> null
+            }
+
+            handler?.apply {
+                sendMessage(obtainMessage().apply {
+                    what = 3
+
+                    data = Bundle().apply {
+                        putParcelable("ultimoUsuario", ultimoUsuario)
+                    }
+                })
+            }
+        }
+    }
+
+
+    fun buscarHistorico() {
+        // TODO
+    }
+
+}
