@@ -25,14 +25,14 @@ class ResumoSaude : BaseActivity() {
         var peso = intent.getDoubleExtra(Constants.EXTRA_PESO,0.0)
 
 
-        binding.nomeTv.setText(nome)
-        binding.imcTv.setText(String.format("%.2f", imc))
-        binding.categoriaTv.setText(categoria)
-        binding.pesoIdealTv.setText(String.format("%.2f", imc))
-        binding.pesoIdealTv.setText(String.format("%.2f", pesoIdeal))
-        binding.gastoCaloricoDiarioTv.setText(String.format("%.2f", gastoCalorico))
-        binding.recomendacaoAgua.setText(String.format("%.2f", (peso * 350) / 100))
+        binding.nomeTv.setText("Nome: " + nome)
+        binding.imcTv.setText("IMC: "+ String.format("%.2f", imc))
+        binding.categoriaTv.setText("Categoria: "+ categoria)
+        binding.pesoTv.setText("Peso: "+ String.format("%.2f", imc))
+        binding.pesoIdealTv.setText("Peso Ideal: " + String.format("%.2f", pesoIdeal))
+        binding.gastoCaloricoDiarioTv.setText("Gasto Calórico Diário: " + String.format("%.2f", gastoCalorico))
+        binding.recomendacaoAgua.setText("Recomendação de Litros de água p/ dia: " + String.format("%.2f", (peso * 350) / 1000))
 
-
+        binding.voltarBt.setOnClickListener { finish() }
     }
 }
