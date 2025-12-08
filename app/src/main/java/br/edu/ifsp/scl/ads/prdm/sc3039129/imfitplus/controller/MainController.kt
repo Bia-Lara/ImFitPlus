@@ -1,19 +1,19 @@
+
 package br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.controller
-
-
-import android.content.Context
+import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
-import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.ui.MainActivity
-import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.CalculoDao
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.AppRoom
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.Calculo
+import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.CalculoDao
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.DataPerson
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.DataPersonDao
+import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.ui.ImcResult
+import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.ui.GastoCalorico
+import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.ui.PesoIdeal
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
 class MainController(private val activity: AppCompatActivity) {
 
     private val db: AppRoom = Room.databaseBuilder(
@@ -22,34 +22,70 @@ class MainController(private val activity: AppCompatActivity) {
         "imfitplus-db"
     ).build()
 
-    val calculoDao: CalculoDao = db.CalculoDao()
-    val personDao: DataPersonDao = db.PersonDao()
+    private val calculoDao: CalculoDao = db.CalculoDao()
+    private val personDao: DataPersonDao = db.PersonDao()
     private val databaseScope = CoroutineScope(Dispatchers.IO)
-
-    fun inserirUsuario(usuario: DataPerson, onResult: (Long) -> Unit) {
+    fun inserirCalculo(calculo: Calculo) {
         databaseScope.launch {
-            val id = personDao.insert(usuario)
-            activity.runOnUiThread {
-                onResult(id)
+            val novoId: Long = calculoDao.insert(calculo)
+            val handler = when (activity) {
+                is ImcResult -> activity.uiHandler
+                else -> null
+            }
+
+            handler?.apply {
+                sendMessage(obtainMessage().apply {
+                    what = 2
+                    data = Bundle().apply {
+                        putLong("calculoId", novoId)
+                    }
+                })
             }
         }
     }
 
-    fun inserirCalculo(calculo: Calculo, onResult: (Long) -> Unit) {
-        databaseScope.launch {
-            val id = calculoDao.insert(calculo)
-            activity.runOnUiThread { onResult(id) }
-        }
-    }
+        fun getCalculo(id: Int) {
+            databaseScope.launch {
+                val calculoEncontrado = calculoDao.getCalculoById(id)
 
-    fun buscarHistoricoDoUsuario(usuarioId: Int){
-        databaseScope.launch {
-            calculoDao.getHistoricoUsuario(usuarioId).let{
-                calculoList->
-                    //TODO
+                val handler = when (activity) {
+                    is ImcResult -> activity.uiHandler
+                    is GastoCalorico -> activity.uiHandler
+                    is PesoIdeal -> activity.uiHandler
+                    else -> null
+                }
+
+                handler?.apply {
+                    sendMessage(obtainMessage().apply {
+                        what = 1
+                        data = Bundle().apply {
+                            putParcelable("calculo", calculoEncontrado)
+                        }
+                    })
+                }
             }
         }
+
+        fun getAllCalculos(): MutableList<Calculo> {
+            return calculoDao.getAllCalculos()
+        }
+
+        fun updateCalculo(calculo: Calculo) {
+            databaseScope.launch {
+                calculoDao.update(calculo)
+            }
+        }
+
+        fun inserirUsuario(usuario: DataPerson, onResult: (Long) -> Unit) {
+            databaseScope.launch {
+                val id = personDao.insert(usuario)
+                activity.runOnUiThread {
+                    onResult(id)
+                }
+            }
+        }
+
+        fun buscarHistorico() {
+            // TODO
+        }
     }
-
-
-}
