@@ -1,67 +1,68 @@
 package br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.ui
 
+import android.os.Build
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Handler
+import android.os.Looper
+import android.os.Message
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.adapter.HistoryAdapter
+import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.controller.MainController
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.databinding.ActivityHistoricoBinding
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.Calculo
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
-class HistoricoActivity : AppCompatActivity() {
-    private val historyBiding: ActivityHistoricoBinding by lazy {
+class HistoricoActivity : BaseActivity() {
+    private val binding: ActivityHistoricoBinding by lazy {
         ActivityHistoricoBinding.inflate(layoutInflater)
     }
 
+    private val mainController: MainController by lazy {
+        MainController(this)
+    }
     private val historyList: MutableList<Calculo> = mutableListOf()
 
-    private val historyAdapter: HistoryAdapter by lazy{
+    private val historyAdapter: HistoryAdapter by lazy {
         HistoryAdapter(this, historyList)
+    }
+    companion object {
+        const val BUSCAR_CALCULOS = 1
+        const val ATUALIZAR_LISTA_DE_CALCULOS = 2
+    }
+
+    val uiHandler = object : Handler(Looper.getMainLooper()) {
+        override fun handleMessage(msg: Message) {
+            super.handleMessage(msg)
+            when (msg.what) {
+                BUSCAR_CALCULOS -> {
+                    mainController.buscarCalculos()
+                }
+
+                ATUALIZAR_LISTA_DE_CALCULOS -> {
+                    val listaRecebida = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        msg.data.getParcelableArrayList("listaCalculos", Calculo::class.java)
+                    } else {
+                        msg.data.getParcelableArrayList<Calculo>("listaCalculos")
+                    }
+
+                    historyList.clear()
+                    listaRecebida?.forEach { historyList.add(it) }
+                    historyAdapter.notifyDataSetChanged()
+                }
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(historyBiding.root)
+        setContentView(binding.root)
 
-        val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+        binding.historyList.adapter = historyAdapter
 
-        historyList.add(
-            Calculo(
-                id = 1,
-                idUsuario = 1,
-                nome = "João",
-                dataHora = LocalDate.parse("01/12/2025", formatter),
-                imc = 24.5,
-                categoriaImc = "Normal",
-                tmb = 1800.0,
-                pesoIdeal = 70.0
-            )
-        )
-        historyList.add(
-            Calculo(
-                id = 2,
-                idUsuario = 1,
-                nome = "João",
-                dataHora = LocalDate.parse("01/12/2025", formatter),
-                imc = 25.8,
-                categoriaImc = "Sobrepeso",
-                tmb = 1850.0,
-                pesoIdeal = 72.5
-            )
-        )
-        historyList.add(
-            Calculo(
-                id = 3,
-                idUsuario = 1,
-                nome = "João",
-                dataHora = LocalDate.parse("01/12/2025", formatter),
-                imc = 26.2,
-                categoriaImc = "Sobrepeso",
-                tmb = 1870.0,
-                pesoIdeal = 73.0
-            )
-        )
+        iniciarBuscaDeHistorico()
 
-        historyBiding.historyList.adapter = historyAdapter
+        binding.voltarBt.setOnClickListener { finish() }
+    }
+
+    private fun iniciarBuscaDeHistorico() {
+        uiHandler.sendMessage(uiHandler.obtainMessage(BUSCAR_CALCULOS))
     }
 }

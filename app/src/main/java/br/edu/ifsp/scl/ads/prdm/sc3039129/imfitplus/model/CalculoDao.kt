@@ -13,14 +13,11 @@ interface CalculoDao {
     @Update
     fun update(calculo: Calculo): Int
 
-    @Query("SELECT * FROM Calculo")
+    @Query("SELECT * FROM Calculo ORDER BY dataHora DESC")
     fun getAllCalculos(): MutableList<Calculo>
 
     @Query("SELECT * FROM Calculo WHERE id=:id")
     fun getCalculoById(id: Int): Calculo
-
-    @Query("SELECT * FROM Calculo ORDER BY dataHora DESC")
-    suspend fun getHistorico(): MutableList<Calculo>
 
     @Delete
     fun delete(calculo: Calculo): Int

@@ -10,6 +10,7 @@ import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.DataPerson
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.DataPersonDao
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.ui.ImcResult
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.ui.GastoCalorico
+import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.ui.HistoricoActivity
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.ui.PersonalData
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.ui.PesoIdeal
 import kotlinx.coroutines.CoroutineScope
@@ -109,8 +110,25 @@ class MainController(private val activity: AppCompatActivity) {
     }
 
 
-    fun buscarHistorico() {
-        // TODO
+    fun buscarCalculos() {
+        databaseScope.launch {
+            val listaDeCalculos = calculoDao.getAllCalculos()
+
+            val handler = when (activity) {
+                is HistoricoActivity -> activity.uiHandler
+                else -> null
+            }
+
+            handler?.apply {
+                sendMessage(obtainMessage().apply {
+                    what = HistoricoActivity.ATUALIZAR_LISTA_DE_CALCULOS
+
+                    data = Bundle().apply {
+                        putParcelableArrayList("listaCalculos", ArrayList(listaDeCalculos))
+                    }
+                })
+            }
+        }
     }
 
 }

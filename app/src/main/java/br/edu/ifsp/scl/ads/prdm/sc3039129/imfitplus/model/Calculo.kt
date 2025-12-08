@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 @Parcelize
 @Entity
