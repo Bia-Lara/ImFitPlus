@@ -13,6 +13,7 @@ import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.ui.GastoCalorico
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.ui.HistoricoActivity
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.ui.PersonalData
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.ui.PesoIdeal
+import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.ui.ResumoSaude
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -54,6 +55,7 @@ class MainController(private val activity: AppCompatActivity) {
                 is ImcResult -> activity.uiHandler
                 is GastoCalorico -> activity.uiHandler
                 is PesoIdeal -> activity.uiHandler
+                is ResumoSaude -> activity.uiHandler
                 else -> null
             }
 

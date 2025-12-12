@@ -17,5 +17,10 @@ data class Calculo(
     val categoriaImc: String?,
     var tmb: Double? = 0.0,
     var pesoIdeal: Double? = 0.0,
+    var fcmax: Int? = 0,
+    var zona_leve: Int? = 0,
+    var zona_queima_gordura: Int? = 0,
+    var zona_aerobica: Int? = 0,
+    var zona_anaerobica: Int = 0,
     val dataHora: LocalDate = LocalDate.now()
 ) : Parcelable

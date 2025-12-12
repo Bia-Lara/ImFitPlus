@@ -4,6 +4,7 @@ import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
+import java.time.LocalDate
 
 @Parcelize
 @Entity
@@ -14,6 +15,7 @@ data class DataPerson(
     var sexo: String = "",
     var altura: Double = 0.0,
     var peso: Double = 0.0,
+    var data_nasc: LocalDate,
     var nivel_atividade: String=""
 
 ): Parcelable

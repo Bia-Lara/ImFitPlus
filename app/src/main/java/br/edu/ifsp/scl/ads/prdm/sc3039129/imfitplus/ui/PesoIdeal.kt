@@ -74,6 +74,7 @@ class PesoIdeal : BaseActivity() {
                 putExtra(Constants.EXTRA_PESO_IDEAL, pesoIdeal)
                 putExtra(Constants.EXTRA_NOME, dados?.nome)
                 putExtra(Constants.EXTRA_PESO, dados?.peso)
+                putExtra(Constants.EXTRA_CALCULO_ID, calculoId)
             }
             startActivity(proximaIntent)
         }

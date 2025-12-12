@@ -16,6 +16,8 @@ import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.controller.MainController
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.databinding.ActivityPersonalDataBinding
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.Constants
 import br.edu.ifsp.scl.ads.prdm.sc3039129.imfitplus.model.DataPerson
+import java.time.LocalDate
+import java.time.Period
 
 class PersonalData : BaseActivity() {
     private val binding: ActivityPersonalDataBinding by lazy {
@@ -68,12 +70,15 @@ class PersonalData : BaseActivity() {
     }
     private fun processarCalculo() {
         val nome = binding.nomeEt.text.toString()
-        val idade = binding.idadeEt.text.toString().toIntOrNull()
+        val data_nasc = binding.dataNascEt.text.toString()
         val altura = binding.alturaEt.text.toString().toDoubleOrNull()
         val peso = binding.pesoEt.text.toString().toDoubleOrNull()
         val sexoId = binding.sexoRg.checkedRadioButtonId
 
-        if (!validarCampos(nome, idade, altura, peso, sexoId)) {
+        var convert_data = LocalDate.parse(data_nasc)
+        var idade = calculateAge(convert_data)
+
+        if (!validarCampos(nome, data_nasc, altura, peso, sexoId)) {
             Toast.makeText(this, "Por favor, preencha todos os campos corretamente.", Toast.LENGTH_LONG).show()
             return
         }
@@ -83,11 +88,12 @@ class PersonalData : BaseActivity() {
 
         val dadosPessoa = DataPerson(
             nome = nome,
-            idade = idade!!,
+            idade = idade,
             sexo = sexoSelecionado,
             altura = altura!!,
             peso = peso!!,
-            nivel_atividade = nivelAtividadeFisica
+            nivel_atividade = nivelAtividadeFisica,
+            data_nasc = convert_data
         )
 
         mainController.inserirUsuario(dadosPessoa) { userId ->
@@ -99,9 +105,14 @@ class PersonalData : BaseActivity() {
         }
     }
 
+    fun calculateAge(birthdate: LocalDate): Int{
+        val currentDate = LocalDate.now()
+        return Period.between(birthdate, currentDate).years
+    }
+
     private fun preencherCampos(usuario: DataPerson) {
         binding.nomeEt.setText(usuario.nome)
-        binding.idadeEt.setText(usuario.idade.toString())
+        binding.dataNascEt.setText(usuario.data_nasc.toString())
         binding.alturaEt.setText(usuario.altura.toString())
         binding.pesoEt.setText(usuario.peso.toString())
 
@@ -120,12 +131,12 @@ class PersonalData : BaseActivity() {
         }
     }
 
-    private fun validarCampos(nome: String, idade: Int?, altura: Double?, peso: Double?, sexoId: Int): Boolean {
+    private fun validarCampos(nome: String, data_nasc: String, altura: Double?, peso: Double?, sexoId: Int): Boolean {
         return when {
             nome.isBlank() -> false
-            idade == null || idade <= 0 -> false
             altura == null || altura < 1.0 || altura > 2.5 -> false
             peso == null || peso <= 0 -> false
+            data_nasc.isBlank() -> false
             sexoId == -1 -> false
             else -> true
         }
