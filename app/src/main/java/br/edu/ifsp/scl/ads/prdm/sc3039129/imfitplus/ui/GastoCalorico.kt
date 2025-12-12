@@ -23,6 +23,7 @@ class GastoCalorico : BaseActivity() {
     }
     private var calculoId: Long = -1L
     private var dados: DataPerson? = null
+    private var tmbAtual: Double = 0.0
     lateinit var uiHandler: Handler
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,8 +52,10 @@ class GastoCalorico : BaseActivity() {
 
                     if (calculo != null && dados != null) {
                         val tmb = calculateGastoCalorico(dados!!.sexo, dados!!.peso, dados!!.altura, dados!!.idade)
+                        tmbAtual = tmb
 
                         calculo.tmb = round(tmb * 100) / 100.0
+
                         mainController.updateCalculo(calculo)
                         binding.resultadoGastoCaloricoTv.text = String.format("%.2f", calculo.tmb)
                     }
@@ -65,7 +68,6 @@ class GastoCalorico : BaseActivity() {
         binding.voltarBt.setOnClickListener { finish() }
 
         binding.calcularPesoIdealBt.setOnClickListener {
-            val tmbAtual = binding.resultadoGastoCaloricoTv.text.toString().toDoubleOrNull() ?: 0.0
 
             val proximaIntent = Intent(this@GastoCalorico, PesoIdeal::class.java).apply {
                 putExtra(Constants.EXTRA_DATA_PERSON, dados)

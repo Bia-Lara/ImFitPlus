@@ -28,10 +28,10 @@ class ResumoSaude : BaseActivity() {
         binding.nomeTv.setText("Nome: " + nome)
         binding.imcTv.setText("IMC: "+ String.format("%.2f", imc))
         binding.categoriaTv.setText("Categoria: "+ categoria)
-        binding.pesoTv.setText("Peso: "+ String.format("%.2f", imc))
+        binding.pesoTv.setText("Peso: "+ String.format("%.2f", peso))
         binding.pesoIdealTv.setText("Peso Ideal: " + String.format("%.2f", pesoIdeal))
         binding.gastoCaloricoDiarioTv.setText("Gasto Calórico Diário: " + String.format("%.2f", gastoCalorico))
-        binding.recomendacaoAgua.setText("Recomendação de Litros de água p/ dia: " + String.format("%.2f", (peso * 350) / 1000))
+        binding.recomendacaoAgua.setText("Recomendação de Litros de água p/ dia: " + String.format("%.2f", (peso * 35) / 1000))
 
         binding.voltarBt.setOnClickListener { finish() }
     }

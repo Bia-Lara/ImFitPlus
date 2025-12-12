@@ -68,10 +68,6 @@ class MainController(private val activity: AppCompatActivity) {
         }
     }
 
-    fun getAllCalculos(): MutableList<Calculo> {
-        return calculoDao.getAllCalculos()
-    }
-
     fun updateCalculo(calculo: Calculo) {
         databaseScope.launch {
             calculoDao.update(calculo)
